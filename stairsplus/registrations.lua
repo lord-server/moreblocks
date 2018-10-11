@@ -78,6 +78,44 @@ for _, name in pairs(default_nodes) do
     end
 end
 
+local lottores_nodes = {
+	"marble",
+	"silver_block",
+	"tin_block",
+	"lead_block",
+	"mithril_block",
+	"galvorn_block",
+	"limestone",
+}
+for _, name in pairs(lottores_nodes) do
+	local mod = "lottores"
+	local nodename = mod .. ":" .. name
+	print(nodename)
+    if minetest.registered_nodes[nodename] then
+        local ndef = table.copy(minetest.registered_nodes[nodename])
+        ndef.sunlight_propagates = true
+
+        -- Stone and desert_stone drop cobble and desert_cobble respectively.
+        if type(ndef.drop) == "string" then
+            ndef.drop = ndef.drop:gsub(".+:", "")
+        end
+
+        -- Use the primary tile for all sides of cut glasslike nodes and disregard paramtype2.
+        if #ndef.tiles > 1 and ndef.drawtype and ndef.drawtype:find("glass") then
+            ndef.tiles = {ndef.tiles[1]}
+            ndef.paramtype2 = nil
+        end
+
+        mod = "moreblocks"
+        stairsplus:register_all(mod, name, nodename, ndef)
+				print("Создание алиасов для lottores")
+        minetest.register_alias_force("stairs:stair_" .. name, mod .. ":stair_" .. name)
+        minetest.register_alias_force("stairs:stair_outer_" .. name, mod .. ":stair_" .. name .. "_outer")
+        minetest.register_alias_force("stairs:stair_inner_" .. name, mod .. ":stair_" .. name .. "_inner")
+        minetest.register_alias_force("stairs:slab_"  .. name, mod .. ":slab_"  .. name)
+    end
+end
+
 -- farming registrations
 if minetest.get_modpath("farming") then
 	local farming_nodes = {"straw"}

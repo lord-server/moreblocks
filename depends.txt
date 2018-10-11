@@ -1,4 +1,5 @@
 default
+lottores
 intllib?
 stairs?
 farming?
