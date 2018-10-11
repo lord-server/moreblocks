@@ -369,20 +369,6 @@ local nodes = {
 		sounds = sound_wood,
 		furnace_burntime = 26,
 	},
-	["all_faces_acacia_tree"] = {
-		description = S("All-faces Acacia Tree"),
-		tiles = {"default_acacia_tree_top.png"},
-		groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2},
-		sounds = sound_wood,
-		furnace_burntime = 34,
-	},
-	["all_faces_aspen_tree"] = {
-		description = S("All-faces Aspen Tree"),
-		tiles = {"default_aspen_tree_top.png"},
-		groups = {tree = 1, choppy = 3, oddly_breakable_by_hand = 1, flammable = 3},
-		sounds = sound_wood,
-		furnace_burntime = 22,
-	},
 	["glow_glass"] = {
 		description = S("Glow Glass"),
 		drawtype = "glasslike_framed_optional",
