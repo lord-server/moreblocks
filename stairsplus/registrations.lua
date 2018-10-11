@@ -58,9 +58,14 @@ for _, name in pairs(default_nodes) do
         local ndef = table.copy(minetest.registered_nodes[nodename])
         ndef.sunlight_propagates = true
 
-        -- Stone and desert_stone drop cobble and desert_cobble respectively.
+        -- Stone and desert_stone drop cobble and desert_cobble respectively. (Так было)
+				-- Изменено только для каменных изделий, что видим то и получаем.
         if type(ndef.drop) == "string" then
-            ndef.drop = ndef.drop:gsub(".+:", "")
+					if ndef.drop == "default:cobble" or "default:desert_cobble" then
+						ndef.drop = nil
+					else
+					  ndef.drop = ndef.drop:gsub(".+:", "")
+					end
         end
 
         -- Use the primary tile for all sides of cut glasslike nodes and disregard paramtype2.
